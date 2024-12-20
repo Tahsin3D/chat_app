@@ -1,3 +1,4 @@
+// https://www.youtube.com/watch?v=ntKkVrQqBYY
 import express from "express";
 import authRoutes from "./routes/auth.route.js";
 import dotenv from 'dotenv'

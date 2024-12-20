@@ -6,9 +6,8 @@ export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
 
   try {
-    if(!fullName || !email || !password)
-    {
-      return res.status(400).json({message: "Missing data"})
+    if (!fullName || !email || !password) {
+      return res.status(400).json({ message: "Missing data" });
     }
 
     if (password.length < 6) {
@@ -50,10 +49,38 @@ export const signup = async (req, res) => {
   }
 };
 
-export const login = (req, res) => {
-  res.send("login route");
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) return res.status(400).json({ message: "Invalid Credentials" });
+
+    const passwordIsCorrect = await bcrypt.compare(password, user.password);
+
+    if (!passwordIsCorrect)
+      return res.status(400).json({ message: "Invalid Credentials" });
+
+    generateToken(user._id, res);
+    return res.status(200).json({
+      id: user._id,
+      name: user.fullName,
+      email: user.email,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 export const logout = (req, res) => {
-  res.send("logout route");
+  try {
+    res.cookie("jwt", "", { maxAge: 0 });
+    return res.status(200).json({ message: "Cookie Cleared" });
+  } 
+  catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
 };
