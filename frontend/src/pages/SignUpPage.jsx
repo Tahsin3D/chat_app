@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -23,28 +23,48 @@ const SignUpPage = () => {
     password: "",
   });
 
-  const { signup, isSigningUp } = useAuthStore();
+  const { signup, isSigningUp, color } = useAuthStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   return (
-    <Grid container sx={{ height: "calc(100vh - 1.1rem)" }}>
+    <Grid container sx={{ height: "calc(100vh - 80px)" }}>
       <Grid item xs={12} md={6}>
         <Box
           sx={{
             height: "100%",
-            backgroundColor: "gray",
-            padding: "70px",
-            display: 'flex',
-            alignItems: 'center'
+            padding: "0 70px",
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          <Box sx={{textAlign: 'center', backgroundColor: 'red', padding: '20px'}}>
+          <Box
+            sx={{
+              textAlign: "center",
+              // backgroundColor: "red",
+              padding: "20px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "40px",
+            }}
+          >
             <Box>
-              <ChatBubbleOutlineIcon/>
-              <Typography variant="h2" fontSize='2.4rem' fontWeight='bold'>Create Account</Typography>
-              <Typography variant="body2" fontSize='1.4rem' >Get started with your free account</Typography>
+              <ChatBubbleOutlineIcon
+                sx={{
+                  fontSize: "6rem",
+                  backgroundColor: color,
+                  color: "white",
+                  padding: "10px",
+                  borderRadius: "10px",
+                }}
+              />
+              <Typography variant="h2" fontSize="3.5rem" fontWeight="bold">
+                Create Account
+              </Typography>
+              <Typography variant="body2" fontSize="1.4rem">
+                Get started with your free account
+              </Typography>
             </Box>
             <form onSubmit={handleSubmit}>
               {/* Full Name */}
@@ -109,19 +129,67 @@ const SignUpPage = () => {
 
               {/* Signup Button */}
               <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                fullWidth
-                sx={{ mt: 2 }}
+                sx={{
+                  backgroundColor: color,
+                  color: "white",
+                  border: "1px solid white",
+                  width: "220px",
+                  padding: '10px 20px',
+                  fontSize: "1.4rem",
+                  borderRadius: "10px",
+                  mt: "50px"
+                }}
               >
-                Signup
+                SIGN UP
               </Button>
             </form>
-            <Box>
-              <Typography variant="span" fontSize='1.2rem' >Already have an account? </Typography>
-              <Link type="" to="/login">SignIn</Link>
-            </Box>
+          </Box>
+        </Box>
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <Box
+          sx={{
+            backgroundColor: color,
+            height: "100%",
+            borderRadius: "5% 0 0 5%",
+          }}
+        >
+          <Box
+            sx={{
+              color: "white",
+              padding: "70px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100%",
+            }}
+          >
+            <Typography
+              variant="h2"
+              textAlign="center"
+              fontSize="3.5rem"
+              fontWeight="bold"
+            >
+              Already have an account?
+            </Typography>
+            <Typography marginTop="50px" variant="body2" fontSize="1.4rem">
+              Login to stay connected to your friends
+            </Typography>
+            <Button
+                sx={{
+                  backgroundColor: color,
+                  color: "white",
+                  border: "1px solid white",
+                  width: "220px",
+                  padding: '10px 20px',
+                  fontSize: "1.4rem",
+                  borderRadius: "10px",
+                  mt: "50px"
+                }}
+              >
+                LOGIN
+              </Button>
           </Box>
         </Box>
       </Grid>

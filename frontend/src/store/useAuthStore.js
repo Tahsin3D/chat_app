@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 
 export const useAuthStore = create((set) => ({
+  color: "#0b8c4c",
   authUser: null,
   isSigningUp: false,
   isLoggingIn: false,
