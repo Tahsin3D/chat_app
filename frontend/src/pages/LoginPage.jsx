@@ -7,6 +7,7 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -27,14 +28,24 @@ const LoginPage = () => {
     e.preventDefault();
   };
   return (
-    <Box sx={{display: "flex", height: "100vh", alignItems: "center"}}>
-      <Grid container sx={{ height: "calc(100vh - 20px)" }}>
+    <Box sx={{ display: "flex", height: "100vh", alignItems: "center" }}>
+      <Grid
+        container
+        sx={{
+          height: "calc(100vh - 20px)",
+          // backgroundColor: "red",
+          // display: "flex",
+          alignItems: "center",
+          // justifyContent: "center"
+        }}
+      >
         <Grid item xs={12} md={6}>
           <Box
             sx={{
               backgroundColor: color,
               height: "100%",
               borderRadius: "0 5% 5% 0 ",
+              display: { md: "flex", xs: "none" },
             }}
           >
             <Box
@@ -47,7 +58,7 @@ const LoginPage = () => {
                 alignItems: "center",
                 justifyContent: "center",
                 height: "100%",
-                maxWidth: "550px"
+                maxWidth: "550px",
               }}
             >
               <Typography
@@ -84,10 +95,10 @@ const LoginPage = () => {
           <Box
             sx={{
               height: "100%",
-              padding: "0 70px",
+              padding: { md: "0", lg: "0 70px" },
               display: "flex",
               alignItems: "center",
-              justifyContent: "flex-end",
+              justifyContent: { lg: "flex-end", xs: "center" },
             }}
           >
             <Box
@@ -96,8 +107,9 @@ const LoginPage = () => {
                 padding: "20px",
                 display: "flex",
                 flexDirection: "column",
+                alignItems: "center",
                 gap: "10px",
-                maxWidth: "450px"
+                maxWidth: "450px",
               }}
             >
               <Box>
@@ -110,7 +122,13 @@ const LoginPage = () => {
                     borderRadius: "10px",
                   }}
                 />
-                <Typography mb="10px" color={color} variant="h2" fontSize="2.5rem" fontWeight="bold">
+                <Typography
+                  mb="10px"
+                  color={color}
+                  variant="h2"
+                  fontSize="2.5rem"
+                  fontWeight="bold"
+                >
                   Sign In
                 </Typography>
                 <Typography variant="body2" fontSize="1.2rem">
@@ -181,6 +199,12 @@ const LoginPage = () => {
                   LOGIN
                 </Button>
               </form>
+              <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                <Stack direction="row" gap="10px">
+                  <Typography variant="span">Don't have an account?</Typography>
+                  <Link to="/signup">SignUp</Link>
+                </Stack>
+              </Box>
             </Box>
           </Box>
         </Grid>
