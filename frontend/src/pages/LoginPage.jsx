@@ -202,7 +202,7 @@ const LoginPage = () => {
                               showPassword ? "Hide password" : "Show password"
                             }
                           >
-                            {showPassword ? (
+                            {!showPassword ? (
                               <VisibilityOffIcon />
                             ) : (
                               <VisibilityIcon />

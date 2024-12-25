@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {
   Box,
   Button,
+  CircularProgress,
   Grid,
   IconButton,
   InputAdornment,
@@ -29,12 +30,14 @@ const SignUpPage = () => {
     e.preventDefault();
   };
   return (
-    <Box sx={{
-      width: "100vw",
-      backgroundColor: "white",
-      display: "flex",
-      height: { xs: "calc(100vh-50px)", md: "100vh" },
-    }}>
+    <Box
+      sx={{
+        width: "100vw",
+        backgroundColor: "white",
+        display: "flex",
+        height: { xs: "calc(100vh-50px)", md: "100vh" },
+      }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -148,7 +151,7 @@ const SignUpPage = () => {
                               showPassword ? "Hide password" : "Show password"
                             }
                           >
-                            {showPassword ? (
+                            {!showPassword ? (
                               <VisibilityOffIcon />
                             ) : (
                               <VisibilityIcon />
@@ -161,6 +164,7 @@ const SignUpPage = () => {
 
                   {/* Signup Button */}
                   <Button
+                    disabled={isSigningUp}
                     sx={{
                       backgroundColor: color,
                       color: "white",
@@ -172,7 +176,13 @@ const SignUpPage = () => {
                       mt: "50px",
                     }}
                   >
-                    SIGN UP
+                    {isSigningUp ? (
+                      <Box sx={{display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: "1.2rem", gap: "15px", color: "white"}}>
+                        <CircularProgress sx={{height: "5px", display: "inline-block",color: "white"}}/> Loading...
+                      </Box>
+                    ) : (
+                      "Sign Up"
+                    )}
                   </Button>
                 </form>
                 <Box sx={{ display: { xs: "flex", md: "none" } }}>
