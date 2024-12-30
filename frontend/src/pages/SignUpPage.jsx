@@ -15,6 +15,7 @@ import {
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import toast from "react-hot-toast";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -26,8 +27,21 @@ const SignUpPage = () => {
 
   const { signup, isSigningUp, color } = useAuthStore();
 
+  const validateForm = () => {
+    if (!formData.fullName.trim()) return toast.error("Full Name is required!");
+    if (!formData.email.trim()) return toast.error("Email is required!");
+    if (!formData.password) return toast.error("Password is required!");
+    if (formData.password.length < 6) return toast.error("Password must be least 6 characters!");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format!");
+
+    return true;
+  }
+  
   const handleSubmit = (e) => {
+    console.log("submitted")
     e.preventDefault();
+    const dataValidated = validateForm();
+    if(dataValidated) signup(formData);
   };
   return (
     <Box
@@ -164,6 +178,7 @@ const SignUpPage = () => {
 
                   {/* Signup Button */}
                   <Button
+                    type="submit"
                     disabled={isSigningUp}
                     sx={{
                       backgroundColor: color,

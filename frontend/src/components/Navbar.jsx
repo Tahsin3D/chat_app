@@ -1,10 +1,13 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useAuthStore } from "../store/useAuthStore";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import Person2Icon from '@mui/icons-material/Person2';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { color } = useAuthStore();
+  const { color, logout } = useAuthStore();
   return (
     <Stack
       direction="row"
@@ -23,28 +26,70 @@ const Navbar = () => {
           sx={{ display: "flex", alignItems: "center", gap: "3px" }}
         >
           <ChatBubbleOutlineIcon
-            sx={{ fill: "white", fontWeight: "bold", fontSize: "2rem" }}
+            sx={{ fill: "white", fontWeight: "bold", fontSize: "32px" }}
           />
           <Typography
             color="white"
             variant="body1"
-            sx={{ fontWeight: "bold", fontSize: "1.4rem" }}
+            sx={{ fontWeight: "bold", fontSize: "16px" }}
           >
             Chat App
           </Typography>
         </Stack>
       </Button>
-      <Button>
-        <Stack
-          direction="row"
-          sx={{ display: "flex", alignItems: "center", gap: "3px" }}
-        >
-          <SettingsIcon sx={{ fill: "white", fontWeight: "bold", fontSize: "2rem" }}/>
-          <Typography color="white" variant="body1" sx={{ fontWeight: "bold", fontSize: "1.4rem" }}>
-            Settings
-          </Typography>
-        </Stack>
-      </Button>
+      <Stack direction='row'>
+        <Button>
+          <Stack
+            direction="row"
+            sx={{ display: "flex", alignItems: "center", gap: "3px" }}
+          >
+            <SettingsIcon
+              sx={{ fill: "white", fontWeight: "bold", fontSize: "32px" }}
+            />
+            <Typography
+              color="white"
+              variant="body1"
+              sx={{ fontWeight: "bold", fontSize: "16px" }}
+            >
+              Settings
+            </Typography>
+          </Stack>
+        </Button>
+        <Button component={Link} to="/profile">
+          <Stack
+            direction="row"
+            sx={{ display: "flex", alignItems: "center", gap: "3px" }}
+          >
+            <Person2Icon
+              sx={{ fill: "white", fontWeight: "bold", fontSize: "32px" }}
+            />
+            <Typography
+              color="white"
+              variant="body1"
+              sx={{ fontWeight: "bold", fontSize: "16px" }}
+            >
+              Profile
+            </Typography>
+          </Stack>
+        </Button>
+        <Button onClick={logout}>
+          <Stack
+            direction="row"
+            sx={{ display: "flex", alignItems: "center", gap: "3px" }}
+          >
+            <LogoutIcon
+              sx={{ fill: "white", fontWeight: "bold", fontSize: "32px" }}
+            />
+            <Typography
+              color="white"
+              variant="body1"
+              sx={{ fontWeight: "bold", fontSize: "16px" }}
+            >
+              Logout
+            </Typography>
+          </Stack>
+        </Button>
+      </Stack>
     </Stack>
   );
 };
