@@ -38,7 +38,6 @@ const SignUpPage = () => {
   }
   
   const handleSubmit = (e) => {
-    console.log("submitted")
     e.preventDefault();
     const dataValidated = validateForm();
     if(dataValidated) signup(formData);

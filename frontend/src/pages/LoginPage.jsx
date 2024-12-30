@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {
   Box,
   Button,
+  CircularProgress,
   Grid,
   IconButton,
   InputAdornment,
@@ -22,10 +23,11 @@ const LoginPage = () => {
     password: "",
   });
 
-  const { signup, isSigningUp, color } = useAuthStore();
+  const { login, isLoggingIn, color } = useAuthStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    login(formData);
   };
   return (
     <Box
@@ -215,6 +217,8 @@ const LoginPage = () => {
 
                   {/* Signup Button */}
                   <Button
+                    type="submit"
+                    disabled={isLoggingIn}
                     sx={{
                       backgroundColor: color,
                       color: "white",
@@ -226,7 +230,29 @@ const LoginPage = () => {
                       mt: "50px",
                     }}
                   >
-                    LOGIN
+                    {isLoggingIn ? (
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          fontSize: "1.2rem",
+                          gap: "15px",
+                          color: "white",
+                        }}
+                      >
+                        <CircularProgress
+                          sx={{
+                            height: "5px",
+                            display: "inline-block",
+                            color: "white",
+                          }}
+                        />{" "}
+                        Loading...
+                      </Box>
+                    ) : (
+                      "Login"
+                    )}
                   </Button>
                 </form>
                 <Box sx={{ display: { xs: "flex", md: "none" } }}>
