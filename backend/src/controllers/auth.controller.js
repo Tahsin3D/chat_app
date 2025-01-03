@@ -79,38 +79,41 @@ export const logout = (req, res) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });
     return res.status(200).json({ message: "Cookie Cleared" });
-  } 
-  catch (err) {
+  } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Internal server error" });
   }
 };
 
-
 export const updateProfile = async (req, res) => {
   try {
-    const {profilePic} = req.body;
+    const { profilePic } = req.body;
 
     const userId = req.user._id;
 
-    if(!profilePic) return res.status(400).json({message: "Profile pic is required"});
+    if (!profilePic)
+      return res.status(400).json({ message: "Profile pic is required" });
 
     const uploadResponse = await cloudinary.uploader.upload(profilePic);
 
-    const updatedUser = await User.findByIdAndUpdate(userId, {profilePic: uploadResponse.secure_url}, {new: true});
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { profilePic: uploadResponse.secure_url },
+      { new: true }
+    );
 
-    res.status(200).json(updatedUser)
+    res.status(200).json(updatedUser);
   } catch (error) {
     console.log(error);
-    res.status(500).json({message: "Internal server error"})
+    res.status(500).json({ message: "Internal server error" });
   }
-}
+};
 
 export const checkAuth = async (req, res) => {
   try {
     res.status(200).json(req.user);
   } catch (error) {
     console.log(error.message);
-    res.status(500).json({message: "Internal Server Error"})
+    res.status(500).json({ message: "Internal Server Error" });
   }
-}
+};

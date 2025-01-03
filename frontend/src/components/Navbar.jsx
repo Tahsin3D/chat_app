@@ -12,7 +12,7 @@ const Navbar = () => {
     <Stack
       direction="row"
       sx={{
-        height: "70px",
+        height: "50px",
         backgroundColor: color,
         color: "white",
         display: "flex",
@@ -20,7 +20,7 @@ const Navbar = () => {
         padding: "0 30px",
       }}
     >
-      <Button>
+      <Button component={Link} to="/">
         <Stack
           direction="row"
           sx={{ display: "flex", alignItems: "center", gap: "3px" }}
