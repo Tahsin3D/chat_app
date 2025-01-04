@@ -1,5 +1,4 @@
 import { Button, Stack, Typography } from "@mui/material";
-import SettingsIcon from "@mui/icons-material/Settings";
 import { useAuthStore } from "../store/useAuthStore";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import Person2Icon from '@mui/icons-material/Person2';
@@ -38,23 +37,6 @@ const Navbar = () => {
         </Stack>
       </Button>
       <Stack direction='row'>
-        <Button>
-          <Stack
-            direction="row"
-            sx={{ display: "flex", alignItems: "center", gap: "3px" }}
-          >
-            <SettingsIcon
-              sx={{ fill: "white", fontWeight: "bold", fontSize: "32px" }}
-            />
-            <Typography
-              color="white"
-              variant="body1"
-              sx={{ fontWeight: "bold", fontSize: "16px" }}
-            >
-              Settings
-            </Typography>
-          </Stack>
-        </Button>
         <Button component={Link} to="/profile">
           <Stack
             direction="row"
